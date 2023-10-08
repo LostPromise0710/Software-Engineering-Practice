@@ -7,13 +7,16 @@ from bs4 import BeautifulSoup
 
 result = list()
 
-url = 'https://bbs.huaweicloud.com/blogs?ticket=ST-8944841-VezLWbvfAE9K31FD6M9hKPGy-sso'
+url = 'https://bbs.huaweicloud.com/blogs'
 # 创建Chrome浏览器实例
 driver = webdriver.Chrome()
 
 # 打开目标页面
 driver.get(url)
 
+button = driver.find_element(By.CSS_SELECTOR, 'a.one-line[title="云计算"]')
+button.click()
+time.sleep(3)
 # 模拟向下滚动获取更多内容，可以根据需求修改滚动次数或滚动高度
 scroll_count = 3  #排除前两次下拉滚动
 for _ in range(scroll_count):
@@ -53,7 +56,7 @@ for article in articles:
 
     result.append(temp2)
 
-with open("test.txt", "w", encoding='utf-8') as file:
+with open("云计算.txt", "w", encoding='utf-8') as file:
     for articles in result:
         for text in articles:
             file.write(text+"\n")
